@@ -3,6 +3,12 @@
 set -x
 echo "Updating README.md with script content..."
 
+# Print current directory for debugging
+echo "Current directory: $(pwd)"
+
+# List files in the current directory for debugging
+ls -la
+
 # Ensure we're in the correct Git repository
 if [ ! -d ".git" ]; then
   echo "Error: Not a git repository. Exiting."
