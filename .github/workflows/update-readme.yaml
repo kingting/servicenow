@@ -26,4 +26,6 @@ jobs:
         git add README.md
         git commit -m 'Update README.md with script content'
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 
