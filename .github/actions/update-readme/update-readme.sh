@@ -16,10 +16,13 @@ if [ ! -d ".git" ]; then
 fi
 
 # Replace placeholders in README.md while keeping the placeholders
-#sed -i -e '/servicenow.js-start/,/servicenow.js-end/ {//!d; /servicenow.js-start/r servicenow.js' -e '}' README.md
 sed -i -e '/servicenow.js-start/,/servicenow.js-end/ {//!d; /servicenow.js-start/r servicenow.js' -e '}' README.md
 sed -i -e '/servicenow.js-start/a```javascript' README.md
 sed -i -e '/servicenow.js-end/i```' README.md
+
+sed -i -e '/packer.js-start/,/packer.js-end/ {//!d; /packer.js-start/r packer.js' -e '}' README.md
+sed -i -e '/packer.js-start/a```javascript' README.md
+sed -i -e '/packer.js-end/i```' README.md
 
 # Check for changes in README.md
 if git diff --quiet README.md; then

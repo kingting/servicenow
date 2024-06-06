@@ -1,3 +1,4 @@
+// File: servicenow.js
 var gitRepo = "https://github.com/your-repo/terraform-scripts.git";
 var terraformScriptPath = "path/to/terraform/script";
 var terraformCommand = "terraform apply -auto-approve";
