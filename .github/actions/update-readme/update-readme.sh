@@ -34,13 +34,4 @@ update_readme() {
 update_readme "servicenow.js" "javascript"
 update_readme "packer.js" "javascript"
 
-# Check for changes in README.md
-if git diff --quiet README.md; then
-  echo 'No changes detected in README.md.'
-  changes=false
-else
-  echo 'Changes detected in README.md.'
-  changes=true
-fi
-echo "changes=${changes}" >> $GITHUB_ENV
 set +x
