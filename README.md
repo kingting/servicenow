@@ -116,24 +116,11 @@ terraform.execute(terraformScriptPath, terraformCommand);
 
    - Add activities for approval, image creation, and CMDB updates.
 
-1. Script to Trigger Packer: [packer.js](https://github.com/kingting/servicenow/blob/main/packer.js)- 
+1. Script to Trigger Packer: [packer.js](https://github.com/kingting/servicenow/blob/main/packer.js)
 
 <!-- packer.js-start -->
 ```javascript
 //File: packer.js
-
-var gitRepo = "https://github.com/your-repo/packer-scripts.git";
-var packerScriptPath = "path/to/packer/template.json";
-var packerCommand = "packer build " + packerScriptPath;
-
-// Clone the Git repository
-var gitClone = new GlideScriptedGit("your-git-username", "your-git-token");
-gitClone.cloneRepo(gitRepo, "/tmp/packer");
-
-// Execute the Packer script
-var packer = new GlideScriptedPacker();
-packer.execute(packerCommand);
-```
 <!-- packer.js-end -->
 
 ### Example Packer Template with Security Hardening
