@@ -80,6 +80,7 @@ Another important concept to introduce into the architecture is the management o
 1. Script to Trigger Terraform: [servicenow.js](https://github.com/kingting/servicenow/blob/main/servicenow.js)
 <!-- servicenow.js-start -->
 ```javascript
+// File: servicenow.js
 var gitRepo = "https://github.com/your-repo/terraform-scripts.git";
 var terraformScriptPath = "path/to/terraform/script";
 var terraformCommand = "terraform apply -auto-approve";
@@ -118,7 +119,21 @@ terraform.execute(terraformScriptPath, terraformCommand);
 1. Script to Trigger Packer: [packer.js](https://github.com/kingting/servicenow/blob/main/packer.js)- 
 
 <!-- packer.js-start -->
-SCRIPT_CONTENT_TO_REPLACE
+```javascript
+//File: packer.js
+
+var gitRepo = "https://github.com/your-repo/packer-scripts.git";
+var packerScriptPath = "path/to/packer/template.json";
+var packerCommand = "packer build " + packerScriptPath;
+
+// Clone the Git repository
+var gitClone = new GlideScriptedGit("your-git-username", "your-git-token");
+gitClone.cloneRepo(gitRepo, "/tmp/packer");
+
+// Execute the Packer script
+var packer = new GlideScriptedPacker();
+packer.execute(packerCommand);
+```
 <!-- packer.js-end -->
 
 ### Example Packer Template with Security Hardening
