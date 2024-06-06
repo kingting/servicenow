@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     bash \
     git \
-    gsed
+    sed
 
 # Copy the script into the container
 COPY update-readme.sh /update-readme.sh
