@@ -32,10 +32,15 @@ sed -i -e '/servicenow.js-start/,/servicenow.js-end/ {//!d; /servicenow.js-start
 #sed -i "/<!-- cleanup.sh-start -->/,/<!-- cleanup.sh-end -->/c\<!-- cleanup.sh-start -->\n\```bash\n$CLEANUP_SCRIPT_CONTENT\n\```\n<!-- cleanup.sh-end -->" README.md
 
 # Check if there are changes
-if git diff --exit-code; then
-  echo "No changes detected, skipping commit."
-  echo "no_changes=true" >> $GITHUB_ENV
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  if git diff --exit-code; then
+    echo "No changes detected, skipping commit."
+    echo "no_changes=true" >> $GITHUB_ENV
+  else
+    echo "Changes detected, committing."
+    echo "no_changes=false" >> $GITHUB_ENV
+  fi
 else
-  echo "Changes detected, committing."
-  echo "no_changes=false" >> $GITHUB_ENV
+  echo "Not a git repository, skipping commit check."
+  echo "no_changes=true" >> $GITHUB_ENV
 fi
