@@ -80,6 +80,7 @@ Another important concept to introduce into the architecture is the management o
 1. Script to Trigger Terraform: [servicenow.js](https://github.com/kingting/servicenow/blob/main/servicenow.js)
 ```javascript
 <!-- servicenow.js-start -->
+SCRIPT_CONTENT
 <!-- servicenow.js-end -->
 ```
 
