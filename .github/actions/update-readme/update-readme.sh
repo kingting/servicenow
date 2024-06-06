@@ -15,14 +15,24 @@ if [ ! -d ".git" ]; then
   exit 1
 fi
 
-# Replace placeholders in README.md while keeping the placeholders
-sed -i -e '/servicenow.js-start/,/servicenow.js-end/ {//!d; /servicenow.js-start/r servicenow.js' -e '}' README.md
-sed -i -e '/servicenow.js-start/a```javascript' README.md
-sed -i -e '/servicenow.js-end/i```' README.md
+# Function to update the README.md with the given script content and type
+update_readme() {
+  local script_filename=$1
+  local script_type=$2
 
-sed -i -e '/packer.js-start/,/packer.js-end/ {//!d; /packer.js-start/r packer.js' -e '}' README.md
-sed -i -e '/packer.js-start/a```javascript' README.md
-sed -i -e '/packer.js-end/i```' README.md
+  # Determine the start and end markers based on the script filename
+  local start_marker="${script_filename}-start"
+  local end_marker="${script_filename}-end"
+
+  # Replace placeholders in README.md while keeping the placeholders
+  sed -i -e "/${start_marker}/,/${end_marker}/ {//!d; /${start_marker}/r ${script_filename}" -e '}' README.md
+  sed -i -e "/${start_marker}/a\\\`\`\`${script_type}" README.md
+  sed -i -e "/${end_marker}/i\\\`\`\`" README.md
+}
+
+# Update README.md with the specified scripts
+update_readme "servicenow.js" "javascript"
+update_readme "packer.js" "javascript"
 
 # Check for changes in README.md
 if git diff --quiet README.md; then
