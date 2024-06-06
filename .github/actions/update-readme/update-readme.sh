@@ -24,9 +24,9 @@ SERVICENOW_JS=$(cat servicenow.js)
 #DEPLOY_SCRIPT_CONTENT=$(cat deploy.sh)
 #CLEANUP_SCRIPT_CONTENT=$(cat cleanup.sh)
 echo $SERVICENOW_JS
-sed --version
+gsed --version
 # Replace placeholders in README.md while keeping the placeholders
-sed -i "/<!-- servicenow.js-start -->/,/<!-- servicenow.js-end -->/c\\
+gsed -i "/<!-- servicenow.js-start -->/,/<!-- servicenow.js-end -->/c\\
 <!-- servicenow.js-start -->\\
 \`\`\`bash\\
 $SERVICENOW_JS\\
