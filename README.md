@@ -79,7 +79,7 @@ Another important concept to introduce into the architecture is the management o
    - Add activities for approval, provisioning, and CMDB updates.
 1. Script to Trigger Terraform: [servicenow.js](https://github.com/kingting/servicenow/blob/main/servicenow.js)
 <!-- servicenow.js-start -->
-```
+```javascript
 var gitRepo = "https://github.com/your-repo/terraform-scripts.git";
 var terraformScriptPath = "path/to/terraform/script";
 var terraformCommand = "terraform apply -auto-approve";
