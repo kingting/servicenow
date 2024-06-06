@@ -1,0 +1,6 @@
+name: 'Update README with Script Content'
+description: 'Update README.md with content from script files'
+inputs: {}
+runs:
+  using: 'bash'
+  main: 'update-readme.sh'

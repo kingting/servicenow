@@ -1,0 +1,7 @@
+name: 'Deploy Application'
+description: 'Deploy the application using the provided script'
+inputs: {}
+runs:
+  using: 'bash'
+  main: 'deploy.sh'
+
