@@ -15,10 +15,32 @@ if [ ! -d ".git" ]; then
   exit 1
 fi
 
-# Function to update the README.md with the given script content and type
+# Function to determine the script type based on file suffix
+get_script_type() {
+  local filename=$1
+  case "${filename##*.}" in
+    js) echo "javascript" ;;
+    py) echo "python" ;;
+    sh) echo "shell" ;;
+    rb) echo "ruby" ;;
+    php) echo "php" ;;
+    go) echo "go" ;;
+    java) echo "java" ;;
+    tf) echo "hcl" ;;
+    hcl) echo "hcl" ;;
+    *) echo "" ;;
+  esac
+}
+
+# Function to update the README.md with the given script content
 update_readme() {
   local script_filename=$1
-  local script_type=$2
+  local script_type=$(get_script_type "${script_filename}")
+
+  if [ -z "$script_type" ]; then
+    echo "Unsupported script type for file: ${script_filename}. Skipping."
+    return
+  fi
 
   # Determine the start and end markers based on the script filename
   local start_marker="${script_filename}-start"
@@ -31,7 +53,7 @@ update_readme() {
 }
 
 # Update README.md with the specified scripts
-update_readme "servicenow.js" "javascript"
-update_readme "packer.js" "javascript"
+update_readme "servicenow.js" 
+update_readme "packer.js"
 
 set +x
