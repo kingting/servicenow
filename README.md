@@ -77,11 +77,9 @@ Another important concept to introduce into the architecture is the management o
 1. Adding Workflow Activities:
 
    - Add activities for approval, provisioning, and CMDB updates.
-1. Script to Trigger Terraform:[servicenow.js](https://github.com/kingting/servicenow/blob/main/servicenow.js)
-
-<!-- servicenow.js-start -->
-<!-- servicenow.js-end -->
+1. Script to Trigger Terraform: [servicenow.js](https://github.com/kingting/servicenow/blob/main/servicenow.js)
 ```javascript
+<!-- servicenow.js-start -->
 var gitRepo = "https://github.com/your-repo/terraform-scripts.git";
 var terraformScriptPath = "path/to/terraform/script";
 var terraformCommand = "terraform apply -auto-approve";
@@ -93,7 +91,9 @@ gitClone.cloneRepo(gitRepo, "/tmp/terraform");
 // Execute the Terraform script
 var terraform = new GlideScriptedTerraform();
 terraform.execute(terraformScriptPath, terraformCommand);
+<!-- servicenow.js-end -->
 ```
+
 ### Managing Packer Images with ServiceNow
 1. Creating a Service Catalog Item for Packer:
 
