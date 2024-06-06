@@ -18,7 +18,7 @@ fi
 # Replace placeholders in README.md while keeping the placeholders
 #sed -i -e '/servicenow.js-start/,/servicenow.js-end/ {//!d; /servicenow.js-start/r servicenow.js' -e '}' README.md
 sed -i -e '/servicenow.js-start/,/servicenow.js-end/ {//!d; /servicenow.js-start/r servicenow.js' -e '}' README.md
-sed -i -e '/servicenow.js-start/a```' README.md
+sed -i -e '/servicenow.js-start/a```javascript' README.md
 sed -i -e '/servicenow.js-end/i```' README.md
 
 # Check for changes in README.md

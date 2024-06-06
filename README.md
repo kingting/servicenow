@@ -78,7 +78,6 @@ Another important concept to introduce into the architecture is the management o
 
    - Add activities for approval, provisioning, and CMDB updates.
 1. Script to Trigger Terraform: [servicenow.js](https://github.com/kingting/servicenow/blob/main/servicenow.js)
-```javascript
 <!-- servicenow.js-start -->
 ```
 var gitRepo = "https://github.com/your-repo/terraform-scripts.git";
@@ -94,7 +93,6 @@ var terraform = new GlideScriptedTerraform();
 terraform.execute(terraformScriptPath, terraformCommand);
 ```
 <!-- servicenow.js-end -->
-```
 
 ### Managing Packer Images with ServiceNow
 1. Creating a Service Catalog Item for Packer:
