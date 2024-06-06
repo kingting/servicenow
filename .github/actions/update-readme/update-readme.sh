@@ -37,10 +37,10 @@ update_readme "packer.js" "javascript"
 # Check for changes in README.md
 if git diff --quiet README.md; then
   echo 'No changes detected in README.md.'
-  no_changes=true
+  changes=false
 else
   echo 'Changes detected in README.md.'
-  no_changes=false
+  changes=true
 fi
-echo "no_changes=${no_changes}" >> $GITHUB_ENV
+echo "changes=${changes}" >> $GITHUB_ENV
 set +x

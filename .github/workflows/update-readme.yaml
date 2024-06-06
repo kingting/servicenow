@@ -18,8 +18,18 @@ jobs:
     - name: Update README.md
       uses: ./.github/actions/update-readme
 
+    - name: Check for changes in README.md
+      run: |
+        if git diff --quiet README.md; then
+          echo 'No changes detected in README.md.'
+          echo "changes=false" >> $GITHUB_ENV
+        else
+          echo 'Changes detected in README.md.'
+          echo "changes=true" >> $GITHUB_ENV
+        fi
+
     - name: Commit and push changes
-      if: env.no_changes == 'false'
+      if: env.changes == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
