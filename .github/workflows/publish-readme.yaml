@@ -34,6 +34,40 @@ jobs:
         echo "theme: minima" >> _config.yml
         echo "markdown: kramdown" >> _config.yml
 
+    - name: Create custom header and footer
+      run: |
+        mkdir -p _includes
+        mkdir -p _layouts
+        echo "<header>" > _includes/header.html
+        echo "  <h1>{{ site.title }}</h1>" >> _includes/header.html
+        echo "  <nav>" >> _includes/header.html
+        echo "    <ul>" >> _includes/header.html
+        echo "      <li><a href='/'>Home</a></li>" >> _includes/header.html
+        echo "      <li><a href='/about'>About</a></li>" >> _includes/header.html
+        echo "      <li><a href='/contact'>Contact</a></li>" >> _includes/header.html
+        echo "    </ul>" >> _includes/header.html
+        echo "  </nav>" >> _includes/header.html
+        echo "</header>" >> _includes/header.html
+        echo "<footer>" > _includes/footer.html
+        echo "  <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>" >> _includes/footer.html
+        echo "</footer>" >> _includes/footer.html
+        echo "<!DOCTYPE html>" > _layouts/default.html
+        echo "<html lang='en'>" >> _layouts/default.html
+        echo "<head>" >> _layouts/default.html
+        echo "  <meta charset='UTF-8'>" >> _layouts/default.html
+        echo "  <meta name='viewport' content='width=device-width, initial-scale=1.0'>" >> _layouts/default.html
+        echo "  <title>{{ page.title }} | {{ site.title }}</title>" >> _layouts/default.html
+        echo "  <link rel='stylesheet' href='{{ '/assets/css/style.css' | relative_url }}'>" >> _layouts/default.html
+        echo "</head>" >> _layouts/default.html
+        echo "<body>" >> _layouts/default.html
+        echo "  {% include header.html %}" >> _layouts/default.html
+        echo "  <main>" >> _layouts/default.html
+        echo "    {{ content }}" >> _layouts/default.html
+        echo "  </main>" >> _layouts/default.html
+        echo "  {% include footer.html %}" >> _layouts/default.html
+        echo "</body>" >> _layouts/default.html
+        echo "</html>" >> _layouts/default.html
+
     - name: Install dependencies
       run: |
         gem install bundler
@@ -42,18 +76,24 @@ jobs:
     - name: Build Jekyll site
       run: |
         bundle exec jekyll build --verbose
-        ls -la
+        ls -la _site
 
     - name: Check _site directory
       run: |
         if [ ! -d "./_site" ]; then
           echo "Error: _site directory not found."
           exit 1
+        else
+          echo "_site directory found, proceeding to deploy."
+          ls -la ./_site
         fi
 
     - name: Deploy to GitHub Pages
+      env:
+        ACTIONS_STEP_DEBUG: true
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: ./_site
+
