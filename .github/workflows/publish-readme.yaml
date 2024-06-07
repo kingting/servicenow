@@ -78,14 +78,13 @@ jobs:
         bundle exec jekyll build --verbose
         ls -la _site
 
-    - name: Check _site directory
+    - name: Check for index.html in _site
       run: |
-        if [ ! -d "./_site" ]; then
-          echo "Error: _site directory not found."
+        if [ ! -f "./_site/index.html" ]; then
+          echo "Error: index.html not found in _site directory."
           exit 1
         else
-          echo "_site directory found, proceeding to deploy."
-          ls -la ./_site
+          echo "index.html found, proceeding to deploy."
         fi
 
     - name: Deploy to GitHub Pages
