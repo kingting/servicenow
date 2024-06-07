@@ -20,6 +20,12 @@ jobs:
       with:
         ruby-version: '3.0'
 
+    - name: Create Gemfile
+      run: |
+        echo "source 'https://rubygems.org'" > Gemfile
+        echo "gem 'jekyll', '~> 4.2.0'" >> Gemfile
+        echo "gem 'minima', '~> 2.5'" >> Gemfile
+
     - name: Install dependencies
       run: |
         gem install bundler
