@@ -28,6 +28,9 @@ get_script_type() {
     java) echo "java" ;;
     tf) echo "hcl" ;;
     hcl) echo "hcl" ;;
+    json) echo "json" ;;
+    yaml) echo "yaml" ;;
+    yml) echo "yaml" ;;
     *) echo "" ;;
   esac
 }
@@ -55,5 +58,6 @@ update_readme() {
 # Update README.md with the specified scripts
 update_readme "servicenow.js" 
 update_readme "packer.js"
+update_readme "secure-packer-template.json"
 
 set +x
