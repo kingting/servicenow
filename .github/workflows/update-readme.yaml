@@ -38,5 +38,5 @@ jobs:
         git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
         git add README.md
         git commit -m 'Auto README.md update with actual script content'
-        git push:wq
+        git push
 
