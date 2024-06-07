@@ -26,13 +26,30 @@ jobs:
         echo "gem 'jekyll', '~> 4.2.0'" >> Gemfile
         echo "gem 'minima', '~> 2.5'" >> Gemfile
 
+    - name: Create _config.yml
+      run: |
+        echo "title: My Jekyll Site" > _config.yml
+        echo "description: >- " >> _config.yml
+        echo "  This is a simple Jekyll site for publishing the README as a GitHub Page." >> _config.yml
+        echo "theme: minima" >> _config.yml
+        echo "markdown: kramdown" >> _config.yml
+
     - name: Install dependencies
       run: |
         gem install bundler
         bundle install
 
     - name: Build Jekyll site
-      run: bundle exec jekyll build
+      run: |
+        bundle exec jekyll build --verbose
+        ls -la
+
+    - name: Check _site directory
+      run: |
+        if [ ! -d "./_site" ]; then
+          echo "Error: _site directory not found."
+          exit 1
+        fi
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -40,4 +57,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: ./_site
-
