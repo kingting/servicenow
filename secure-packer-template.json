@@ -1,0 +1,38 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "your-access-key",
+      "secret_key": "your-secret-key",
+      "region": "us-east-1",
+      "source_ami": "ami-0abcdef1234567890",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ami_name": "secure-ami-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y",
+        "sudo yum install -y nginx",
+        "sudo systemctl enable nginx",
+        "sudo systemctl start nginx",
+        "sudo yum install -y fail2ban",
+        "sudo systemctl enable fail2ban",
+        "sudo systemctl start fail2ban",
+        "sudo yum install -y iptables",
+        "sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT",
+        "sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT",
+        "sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT",
+        "sudo iptables -A INPUT -j DROP",
+        "sudo iptables-save | sudo tee /etc/sysconfig/iptables"
+      ]
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "playbooks/harden.yml"
+    }
+  ]
+}
