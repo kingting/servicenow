@@ -139,9 +139,9 @@ packer.execute(packerCommand);
 ### Example Packer Template with Security Hardening
 Packer Template File (secure-packer-template.json):
 
-<!-- secure-packer-template.json -->
+<!-- secure-packer-template.json-start -->
 CONTENT 
-<!-- secure-packer-template.json -->
+<!-- secure-packer-template.json-end -->
 
 Ansible Playbook for Additional Hardening (playbooks/harden.yml):
 ```yaml
