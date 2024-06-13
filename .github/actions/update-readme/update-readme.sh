@@ -55,9 +55,12 @@ update_readme() {
   sed -i -e "/${end_marker}/i\\\`\`\`" README.md
 }
 
-# Update README.md with the specified scripts
-update_readme "servicenow.js" 
-update_readme "packer.js"
-update_readme "secure-packer-template.json"
+# Extract all filenames from lines containing '-start -->' 
+FILENAMES=$(grep -e '-start -->' README.md | awk '{gsub(/-start/, "", $2); print $2}')
+echo $FILENAMES
 
+# Update README.md with the specified scripts
+for FILENAME in $FILENAMES; do
+  update_readme $FILENAME 
+done
 set +x
